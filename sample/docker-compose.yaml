@@ -8,4 +8,6 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./lambda:/lambda
-    command: invoke
+    command: 
+      - invoke
+      - '{"key":"value"}'
