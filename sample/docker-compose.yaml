@@ -1,0 +1,11 @@
+version: "3.8"
+
+services:
+  lambda-invoke:
+    container_name: lambda-invoke
+    image: raphaelbh/lambda
+    network_mode: host
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./lambda:/lambda
+    command: invoke
