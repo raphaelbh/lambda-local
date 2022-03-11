@@ -20,10 +20,8 @@ Available actions:
 ## Installation
 
 ```bash
-$ docker build -t raphaelbh/lambda-local:latest .
+$ docker build -t raphaelbh/lambda:latest .
 ```
-    
-## Usage
 
 ## Usage
 
@@ -35,9 +33,9 @@ Commands:
 - $2: data (payload)
 
 ```bash
-$ docker run -v /var/run/docker.sock:/var/run/docker.sock -v /home/raphael/Workspace/lambda-local/_sample/lambda:/lambda --net=host raphaelbh/lambda-local invoke '{"key":"value"}'
+$ docker run -v /var/run/docker.sock:/var/run/docker.sock -v $(pwd)/sample/lambda:/lambda --net=host raphaelbh/lambda-local invoke '{"key":"value"}'
 or
-$ docker run -v /var/run/docker.sock:/var/run/docker.sock -v /home/raphael/Workspace/lambda-local/_sample/lambda:/lambda --net=host raphaelbh/lambda-local invoke $(cat event.json | tr -d " \t\n\r")
+$ docker run -v /var/run/docker.sock:/var/run/docker.sock -v $(pwd)/sample/lambda:/lambda --net=host raphaelbh/lambda-local invoke $(cat sample/events/event.json | tr -d " \t\n\r")
 ```
 
 PS: `/var/run/docker.sock` should be shared as volume
