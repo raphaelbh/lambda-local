@@ -25,20 +25,24 @@ $ docker build -t raphaelbh/lambda-local:latest .
     
 ## Usage
 
+## Usage
+
 A folder with the lambda function must be informed through a volume:
 `{your_folder}:/lambda`
 
-Command $1: action 
-Command $2: data (payload)
-
-PS: `/var/run/docker.sock` should be shared as volume
-PS: Local network should be shared `--net=host`
+Commands:
+- $1: action 
+- $2: data (payload)
 
 ```bash
 $ docker run -v /var/run/docker.sock:/var/run/docker.sock -v /home/raphael/Workspace/lambda-local/_sample/lambda:/lambda --net=host raphaelbh/lambda-local invoke '{"key":"value"}'
 or
 $ docker run -v /var/run/docker.sock:/var/run/docker.sock -v /home/raphael/Workspace/lambda-local/_sample/lambda:/lambda --net=host raphaelbh/lambda-local invoke $(cat event.json | tr -d " \t\n\r")
 ```
+
+PS: `/var/run/docker.sock` should be shared as volume
+
+PS: Local network should be shared `--net=host`
 
 ## Tech Stack
 
