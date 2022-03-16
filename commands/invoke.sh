@@ -5,7 +5,7 @@ payload=${1:-'{}'}
 
 docker rm -f lambda 2> /dev/null || true
 docker build -t lambda /lambda > /dev/null
-docker run -d --net=host --name lambda lambda > /dev/null
+docker run -d --net=host --name lambda --env-file /lambda/.env lambda > /dev/null
 
 response=$(curl -X POST "http://localhost:8080/2015-03-31/functions/function/invocations" -H 'Content-Type: application/json' -d $payload)
 
