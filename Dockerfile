@@ -1,4 +1,5 @@
 FROM alpine
+LABEL maintainer="raphaeldias.ti@gmail.com"
 
 RUN apk update
 RUN apk add --update docker openrc
