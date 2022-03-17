@@ -2,7 +2,7 @@
 
 COMMAND=$1
 
-if [ $COMMAND != "invoke" ]; then
+if [ $COMMAND != "invoke" ] && [ $COMMAND != "update-code" ]; then
   echo "!!! command not found !!!"
   exit
 fi
