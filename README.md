@@ -10,7 +10,11 @@ https://hub.docker.com/repository/docker/raphaelbh/lambda-local
 
 
 Available actions:
-- invoke
+- invoke ${event}
+- update-code ${lambda-name}
+
+
+`update-code`: update lambda code created in the [localstack](https://localstack.cloud/)
 
 
 ## Requirements
@@ -28,19 +32,27 @@ $ docker build -t raphaelbh/lambda:latest .
 A folder with the lambda function must be informed through a volume:
 `{your_folder}:/lambda`
 
-Commands:
-- $1: action 
-- $2: data (payload)
+Important:
+- `/var/run/docker.sock` should be shared as volume
+- Local network should be shared `--net=host`
 
 ```bash
-$ docker run -v /var/run/docker.sock:/var/run/docker.sock -v $(pwd)/sample/lambda:/lambda --net=host raphaelbh/lambda invoke '{"key":"value"}'
-or
-$ docker run -v /var/run/docker.sock:/var/run/docker.sock -v $(pwd)/sample/lambda:/lambda --net=host raphaelbh/lambda invoke $(cat sample/events/event.json | tr -d " \t\n\r")
+# create alias for container run
+alias lambda="docker run -v /var/run/docker.sock:/var/run/docker.sock -v $(pwd)/sample/lambda:/lambda --net=host raphaelbh/lambda"
 ```
 
-PS: `/var/run/docker.sock` should be shared as volume
+```bash
+# call invoke action
+$ lambda invoke '{"key":"value"}'
+or
+$ lambda invoke $(cat sample/events/event.json | tr -d " \t\n\r")
+```
 
-PS: Local network should be shared `--net=host`
+```bash
+# call update-code action
+$ lambda update-code 'LambdaFunctionName'
+```
+
 
 ## Tech Stack
 
