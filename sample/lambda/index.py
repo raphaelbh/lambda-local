@@ -1,6 +1,6 @@
 import os
 
-def lambda_handler(event, context):
+def handler(event, context):
     username = os.getenv('username')
     body = f"Hi, {username}! =)"
     return {

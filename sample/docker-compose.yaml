@@ -1,16 +1,16 @@
 version: "3.8"
-
 services:
-  lambda-invoke:
-    container_name: lambda-invoke
-    image: raphaelbh/lambda
-    network_mode: host
+  localstack:
+    container_name: localstack
+    image: localstack/localstack
+    ports:
+      - "127.0.0.1:4566:4566"
+  bootstrap:
+    container_name: bootstrap
+    image: raphaelbh/bootstrap
+    environment:
+      - START_SCRIPT=./bootstrap/run.sh
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - ./lambda:/lambda
-    command:
-      - invoke
-      - '{"key":"value"}'
-    #command:
-    #  - update-code
-    #  - GetTransactionsByUserLambda
+      - ./:/bootstrap
+    depends_on:
+      - localstack
